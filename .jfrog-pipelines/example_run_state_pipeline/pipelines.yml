@@ -36,6 +36,8 @@ pipelines:
        execution:
          onExecute:
            - add_run_variables first_stepid=$step_id
+           - echo $step_id
+           - echo $buildNumber
            - add_run_variables ${first_stepid}_buildNumber=${run_number}    
            
      - name: step_4
