@@ -1,0 +1,60 @@
+resources:
+  - name: myAppRepo
+    type: GitRepo
+    configuration:
+      gitProvider: myGithub                       # <-- replace with your integration
+      #path: jfrog/jfrog-pipelines-steps-examples 
+
+pipelines:
+ - name: example_run_state_pipeline
+   steps:
+     - name: step_1
+       type: Bash
+       configuration:
+         inputResources:
+           - name: myAppRepo            # Triggering resource
+       execution:
+         onExecute:
+           - add_run_variables first_stepid=$step_id
+           - add_run_variables ${first_stepid}_buildNumber=${run_number}
+           
+     - name: step_2
+       type: Bash
+       configuration:
+         inputResources:
+           - name: myAppRepo            # Triggering resource
+       execution:
+         onExecute:
+           - add_run_variables first_stepid=$step_id
+           - add_run_variables ${first_stepid}_buildNumber=${run_number} 
+           
+     - name: step_3
+       type: Bash
+       configuration:
+         inputResources:
+           - name: myAppRepo            # Triggering resource
+       execution:
+         onExecute:
+           - add_run_variables first_stepid=$step_id
+           - add_run_variables ${first_stepid}_buildNumber=${run_number}    
+           
+     - name: step_4
+       type: Bash
+       configuration:
+         inputResources:
+           - name: myAppRepo            # Triggering resource
+       execution:
+         onExecute:
+           - add_run_variables first_stepid=$step_id
+           - add_run_variables ${first_stepid}_buildNumber=${run_number}           
+
+     - name: step_5
+       type: Bash
+       configuration:
+         inputSteps:
+           - name: step_4
+       execution:
+         onExecute:
+           - echo "Hello world"
+           - echo $first_stepid
+           - echo ${first_stepid}_buildNumber
