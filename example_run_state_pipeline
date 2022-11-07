@@ -2,7 +2,7 @@ resources:
   - name: myAppRepo
     type: GitRepo
     configuration:
-      gitProvider: myGithub                       # <-- replace with your integration
+      gitProvider: rajGit                       # <-- replace with your integration
       #path: jfrog/jfrog-pipelines-steps-examples 
 
 pipelines:
